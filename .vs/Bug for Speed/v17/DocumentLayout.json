@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Kuliah\\Unity Project\\Bug for Speed\\Bug for Speed\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7CBA6657-6C50-4FBF-79D1-589917DE82F9}|Assembly-CSharp.csproj|c:\\kuliah\\unity project\\bug for speed\\bug for speed\\assets\\transitions\\levelloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CBA6657-6C50-4FBF-79D1-589917DE82F9}|Assembly-CSharp.csproj|solutionrelative:assets\\transitions\\levelloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CBA6657-6C50-4FBF-79D1-589917DE82F9}|Assembly-CSharp.csproj|c:\\kuliah\\unity project\\bug for speed\\bug for speed\\assets\\scenes\\mainmenu\\scriptmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CBA6657-6C50-4FBF-79D1-589917DE82F9}|Assembly-CSharp.csproj|solutionrelative:assets\\scenes\\mainmenu\\scriptmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ScriptMenu.cs",
+              "DocumentMoniker": "C:\\Kuliah\\Unity Project\\Bug for Speed\\Bug for Speed\\Assets\\Scenes\\MainMenu\\ScriptMenu.cs",
+              "RelativeDocumentMoniker": "Assets\\Scenes\\MainMenu\\ScriptMenu.cs",
+              "ToolTip": "C:\\Kuliah\\Unity Project\\Bug for Speed\\Bug for Speed\\Assets\\Scenes\\MainMenu\\ScriptMenu.cs",
+              "RelativeToolTip": "Assets\\Scenes\\MainMenu\\ScriptMenu.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwCEAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T09:42:57.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LevelLoader.cs",
+              "DocumentMoniker": "C:\\Kuliah\\Unity Project\\Bug for Speed\\Bug for Speed\\Assets\\Transitions\\LevelLoader.cs",
+              "RelativeDocumentMoniker": "Assets\\Transitions\\LevelLoader.cs",
+              "ToolTip": "C:\\Kuliah\\Unity Project\\Bug for Speed\\Bug for Speed\\Assets\\Transitions\\LevelLoader.cs",
+              "RelativeToolTip": "Assets\\Transitions\\LevelLoader.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T09:41:00.237Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

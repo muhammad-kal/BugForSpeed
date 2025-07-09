@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Kuliah\\Unity Project\\Bug for Speed\\Bug for Speed\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\kuliah\\unity project\\bug for speed\\bug for speed\\assets\\scriptmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:assets\\scriptmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ScriptMenu.cs",
+              "DocumentMoniker": "C:\\Kuliah\\Unity Project\\Bug for Speed\\Bug for Speed\\Assets\\ScriptMenu.cs",
+              "RelativeDocumentMoniker": "Assets\\ScriptMenu.cs",
+              "ToolTip": "C:\\Kuliah\\Unity Project\\Bug for Speed\\Bug for Speed\\Assets\\ScriptMenu.cs",
+              "RelativeToolTip": "Assets\\ScriptMenu.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAACgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T03:52:14.096Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
