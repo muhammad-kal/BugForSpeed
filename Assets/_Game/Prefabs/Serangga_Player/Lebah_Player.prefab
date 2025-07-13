@@ -195,6 +195,10 @@ MonoBehaviour:
   skillKey: 102
   skillCheckPrefab: {fileID: 8413238249584963488, guid: 83a52029295acb74cb0dc37092d314ae, type: 3}
   uiRoot: {fileID: 0}
+  maxSpeed: 5
+  acceleration: 25
+  deceleration: 35
+  jumpForce: 400
 --- !u!70 &7892420275451785880
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

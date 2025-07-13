@@ -1,13 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class Lebah : MonoBehaviour
+public class KumbangTanduk : MonoBehaviour
 {
     [Header("Skill Settings")]
     [SerializeField] private string TagLawan = "Enemy";
     [SerializeField] private Sprite playerSprite;
     [SerializeField] private Vector2 offset = new Vector2(0.5f, 0.5f);
-    [SerializeField] private float stunDuration = 1f;
     [SerializeField] private float cooldownDuration = 2f;
     [SerializeField] private KeyCode skillKey = KeyCode.F;
 
@@ -41,7 +40,7 @@ public class Lebah : MonoBehaviour
         // Jika objek ini bertag Enemy, langsung serang otomatis (tanpa skill-check)
         if (CompareTag("Enemy"))
         {
-            float randomDelay = Random.Range(0.5f, 4.0f);
+            float randomDelay = Random.Range(0.5f, 2.0f);
             Invoke(nameof(AutoAttack), randomDelay);
         }
     }
@@ -96,27 +95,41 @@ public class Lebah : MonoBehaviour
         };
     }
 
-    /* ───────── Stun Logic ───────── */
+    /* ───────── Skill Logic ───────── */
 
     private IEnumerator Skill(GameObject enemy)
     {
-        if (enemy == null) yield break;
+    if (enemy == null) yield break;
 
-        Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
-        MonoBehaviour mover = enemy.GetComponent<MonoBehaviour>(); // Ganti jika ada skrip gerak spesifik
-        Vector2 savedVel = rb ? rb.velocity : Vector2.zero;
+    Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
+    if (rb == null) yield break;
 
-        if (rb) rb.velocity = Vector2.zero;
-        if (mover) mover.enabled = false;
+    // Tempatkan di depan musuh
+    floatingSprite.transform.position = (Vector2)enemy.transform.position + offset;
 
-        floatingSprite.transform.position = (Vector2)enemy.transform.position + offset;
-        floatingSprite.SetActive(true);
+    // Balik horizontal (mirror)
+    Vector3 scale = floatingSprite.transform.localScale;
+    scale.x = -Mathf.Abs(scale.x); // pastikan selalu negatif (terbalik)
+    floatingSprite.transform.localScale = scale;
+    floatingSprite.SetActive(true);
 
-        yield return new WaitForSeconds(stunDuration);
+    // Simpan kecepatan awal
+    Vector2 originalVelocity = rb.velocity;
 
-        if (rb) rb.velocity = savedVel;
-        if (mover) mover.enabled = true;
-        floatingSprite.SetActive(false);
+    // Dorong ke kiri selama 1 detik
+    float timer = 0f;
+    while (timer < 1f)
+    {
+        rb.velocity = new Vector2(-3f, rb.velocity.y);  // Kecepatan ke kiri
+        timer += Time.deltaTime;
+        yield return null;
+    }
+
+    // Kembalikan kontrol ke AI
+    rb.velocity = originalVelocity;
+
+    // Sembunyikan sprite
+    floatingSprite.SetActive(false);
     }
 
     private void changestats()

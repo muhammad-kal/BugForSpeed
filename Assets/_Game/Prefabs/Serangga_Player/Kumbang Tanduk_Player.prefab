@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 539869092737411769}
   - component: {fileID: 1193859945829599228}
   - component: {fileID: 8937262591760376674}
+  - component: {fileID: -8181441357603856453}
   m_Layer: 6
   m_Name: Kumbang Tanduk_Player
   m_TagString: Player
@@ -271,6 +272,30 @@ MonoBehaviour:
   downhillCheck: {fileID: 5448050655386275800}
   cliffCheck: {fileID: 6334445662888610278}
   enemyJumpCooldown: 1
+--- !u!114 &-8181441357603856453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6480054368834547131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81dc92927fe4bb042ae378bc8d3cd9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TagLawan: Enemy
+  playerSprite: {fileID: 21300000, guid: 4d164ef8a3a706c4a91e36d88b9b25fe, type: 3}
+  offset: {x: 0.5, y: 0.5}
+  stunDuration: 1
+  cooldownDuration: 2
+  skillKey: 102
+  skillCheckPrefab: {fileID: 8413238249584963488, guid: 83a52029295acb74cb0dc37092d314ae, type: 3}
+  uiRoot: {fileID: 0}
+  maxSpeed: 5
+  acceleration: 25
+  deceleration: 35
+  jumpForce: 400
 --- !u!1 &8009614620506294036
 GameObject:
   m_ObjectHideFlags: 0

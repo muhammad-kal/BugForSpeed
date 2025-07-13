@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float maxSpeed      = 5f;   // kecepatan puncak
-    [SerializeField] private float acceleration  = 25f;  // percepatan (unit/s²)
-    [SerializeField] private float deceleration  = 35f;  // perlambatan saat lepas tombol
-    [SerializeField] private float jumpForce     = 400f;
+    [SerializeField] public float maxSpeed      = 5f;   // kecepatan puncak
+    [SerializeField] public float acceleration  = 25f;  // percepatan (unit/s²)
+    [SerializeField] public float deceleration  = 35f;  // perlambatan saat lepas tombol
+    [SerializeField] public float jumpForce     = 400f;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
