@@ -5,19 +5,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 400f;
+    [SerializeField] private float maxSpeed      = 5f;   // kecepatan puncak
+    [SerializeField] private float acceleration  = 25f;  // percepatan (unit/s²)
+    [SerializeField] private float deceleration  = 35f;  // perlambatan saat lepas tombol
+    [SerializeField] private float jumpForce     = 400f;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundRadius = 0.1f;
+    [SerializeField] private float groundRadius  = 0.1f;
     [SerializeField] private LayerMask groundLayer;
 
     [Header("Enemy Jump Logic")]
-    [SerializeField] private Transform gapCheck;        // ujung depan kaki
-    [SerializeField] private Transform downhillCheck;   // sedikit lebih rendah
-    [SerializeField] private Transform cliffCheck;      // sensor halangan
-
+    [SerializeField] private Transform gapCheck;
+    [SerializeField] private Transform downhillCheck;
+    [SerializeField] private Transform cliffCheck;
     [SerializeField] private float enemyJumpCooldown = 1f;
 
     private Rigidbody2D rb;
@@ -28,44 +29,47 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb      = GetComponent<Rigidbody2D>();
         isPlayer = CompareTag("Player");
-        Debug.Log(isPlayer);
     }
 
     private void Update()
     {
-        // float moveInput = isPlayer ? Input.GetAxisRaw("Horizontal") : 1f;
-        float moveInput = isPlayer ? 1f : 1f;
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        /* --------- INPUT / AI --------- */
+        float moveInput = isPlayer ? Input.GetAxisRaw("Horizontal") : 1f;     // AI = jalan terus
+        float targetSpeed = moveInput * maxSpeed;
 
-        if (moveInput > 0 && !facingRight) Flip();
-        if (moveInput < 0 && facingRight) Flip();
+        /* --------- ACCELERATION --------- */
+        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deceleration;
+        float newVelX = Mathf.MoveTowards(rb.velocity.x, targetSpeed, accelRate * Time.deltaTime);
+        rb.velocity   = new Vector2(newVelX, rb.velocity.y);
 
-        // --- Grounded check (umum) ---
+        /* --------- Flip sprite --------- */
+        if (newVelX > 0.01f && !facingRight) Flip();
+        if (newVelX < -0.01f && facingRight) Flip();
+
+        /* --------- Grounded check --------- */
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
-        if (isPlayer)
-        {
-            if (isGrounded && Input.GetButtonDown("Jump"))
-            {
-                rb.AddForce(Vector2.up * jumpForce);
-            }
-            return;
-        }
+        /* --------- Player Jump --------- */
+        if (isPlayer && isGrounded && Input.GetButtonDown("Jump"))
+            rb.AddForce(Vector2.up * jumpForce);
 
-        // ---------- Enemy logic ----------
-        bool noGroundAhead = !Physics2D.OverlapCircle(gapCheck.position, groundRadius, groundLayer);
-        bool groundDownhill = Physics2D.OverlapCircle(downhillCheck.position, groundRadius, groundLayer);
-        bool obstacleAhead = Physics2D.OverlapCircle(cliffCheck.position, groundRadius, groundLayer);
+        /* --------- Enemy logic --------- */
+        if (!isPlayer) HandleEnemyJump();
+    }
+
+    private void HandleEnemyJump()
+    {
+        bool noGroundAhead  = !Physics2D.OverlapCircle(gapCheck.position,      groundRadius, groundLayer);
+        bool groundDownhill =  Physics2D.OverlapCircle(downhillCheck.position, groundRadius, groundLayer);
+        bool obstacleAhead  =  Physics2D.OverlapCircle(cliffCheck.position,    groundRadius, groundLayer);
 
         bool shouldJump =
-            (noGroundAhead && groundDownhill)   // turunan tajam → lompat
-            || obstacleAhead;                   // ada penghalang depan → lompat
+              (noGroundAhead && groundDownhill)   // turunan tajam
+           || obstacleAhead;                      // penghalang
 
-        if (isGrounded
-            && shouldJump
-            && Time.time - lastEnemyJumpTime >= enemyJumpCooldown)
+        if (isGrounded && shouldJump && Time.time - lastEnemyJumpTime >= enemyJumpCooldown)
         {
             rb.AddForce(Vector2.up * jumpForce);
             lastEnemyJumpTime = Time.time;
@@ -75,18 +79,18 @@ public class PlayerController : MonoBehaviour
     private void Flip()
     {
         facingRight = !facingRight;
-        var scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        var s = transform.localScale;
+        s.x *= -1;
+        transform.localScale = s;
     }
 
-    // ---------- Gizmos ----------
+    /* --------- Gizmos --------- */
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        if (groundCheck   != null) Gizmos.DrawWireSphere(groundCheck.position,   groundRadius);
-        if (gapCheck      != null) Gizmos.DrawWireSphere(gapCheck.position,      groundRadius);
-        if (downhillCheck != null) Gizmos.DrawWireSphere(downhillCheck.position, groundRadius);
-        if (cliffCheck    != null) Gizmos.DrawWireSphere(cliffCheck.position,    groundRadius);
+        if (groundCheck)   Gizmos.DrawWireSphere(groundCheck.position,   groundRadius);
+        if (gapCheck)      Gizmos.DrawWireSphere(gapCheck.position,      groundRadius);
+        if (downhillCheck) Gizmos.DrawWireSphere(downhillCheck.position, groundRadius);
+        if (cliffCheck)    Gizmos.DrawWireSphere(cliffCheck.position,    groundRadius);
     }
 }

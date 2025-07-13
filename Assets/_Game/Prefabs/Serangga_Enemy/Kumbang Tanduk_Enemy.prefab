@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 3839511917558845771}
   - component: {fileID: 2529802423015009291}
   - component: {fileID: 539869092737411769}
-  - component: {fileID: 2844494838178404140}
+  - component: {fileID: 4880803261900492101}
   - component: {fileID: 8937262591760376674}
   m_Layer: 7
   m_Name: Kumbang Tanduk_Enemy
@@ -211,8 +211,8 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &2844494838178404140
-BoxCollider2D:
+--- !u!70 &4880803261900492101
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -243,19 +243,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3605348, y: -0.009487987}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 5}
-    newSize: {x: 5, y: 5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.3301547, y: 1.4895256}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.34992784, y: -0.010767947}
+  m_Size: {x: 3.3311446, y: 1.4684682}
+  m_Direction: 1
 --- !u!114 &8937262591760376674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe14278ba34bcc4d8215fdc60885d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  maxSpeed: 5
+  acceleration: 25
+  deceleration: 35
   jumpForce: 400
   groundCheck: {fileID: 7924481023415590895}
   groundRadius: 0.1
