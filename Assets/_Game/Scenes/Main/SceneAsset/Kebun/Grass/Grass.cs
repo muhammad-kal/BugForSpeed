@@ -14,6 +14,9 @@ public class Grass : MonoBehaviour
     [Header("Skill Logic")]
     [SerializeField] private Vector2 floatingOffset = Vector2.up * 0.5f;
 
+    [Header("Skill Check Status")]
+    [SerializeField] private bool sudahCheck;
+
     private Camera mainCam;
     private GameObject popupImageGO;     // image yang muncul di tengah
     private bool skillCheckRunning;
@@ -23,10 +26,10 @@ public class Grass : MonoBehaviour
         mainCam = Camera.main;
 
         // Buat Image popup satu kali (disembunyikan di awal)
-        if (popupSprite != null && uiRoot != null)
+        if (popupSprite != null)
         {
             popupImageGO = new GameObject("CenterPopup", typeof(RectTransform), typeof(Image));
-            popupImageGO.transform.SetParent(uiRoot, false);
+            popupImageGO.transform.SetParent(uiRoot,false);
 
             var img = popupImageGO.GetComponent<Image>();
             img.sprite = popupSprite;
@@ -66,22 +69,46 @@ public class Grass : MonoBehaviour
         skillCheckRunning = true;
 
         // Buat instance skill-check UI
-        GameObject go = Instantiate(skillCheckPrefab, uiRoot);
+        GameObject go = Instantiate(skillCheckPrefab, null);
         SkillCheck sc = go.GetComponent<SkillCheck>();
 
         sc.OnFinished = result =>
         {
             // Hapus UI skill-check
-            Destroy(go);
+            //Destroy(go);
             // Sembunyikan sprite popup
             if (popupImageGO) popupImageGO.SetActive(false);
 
             skillCheckRunning = false;
 
             if (result)
+            {
+                popupImageGO.SetActive(true);
                 Debug.Log("Skill-check BERHASIL ✔");
+            }
             else
                 Debug.Log("Skill-check GAGAL ✖");
+
+            sudahCheck = true;
         };
+    }
+
+    private void MunculSerangga()
+    {
+        popupImageGO = new GameObject("CenterPopup", typeof(RectTransform), typeof(Image));
+        popupImageGO.transform.SetParent(uiRoot, false);
+
+        var img = popupImageGO.GetComponent<Image>();
+        img.sprite = popupSprite;
+        img.preserveAspect = true;
+
+        var rt = img.rectTransform;
+        rt.anchorMin = rt.anchorMax = rt.pivot = Vector2.one * 0.5f;
+        rt.anchoredPosition = Vector2.zero;
+
+        float max = Mathf.Min(Screen.width, Screen.height) * 0.6f;
+        rt.sizeDelta = new Vector2(max, max);
+
+        popupImageGO.SetActive(true);
     }
 }
