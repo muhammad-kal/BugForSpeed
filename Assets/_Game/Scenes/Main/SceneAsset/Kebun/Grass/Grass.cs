@@ -83,7 +83,7 @@ public class Grass : MonoBehaviour
 
             if (result)
             {
-                popupImageGO.SetActive(true);
+                // popupImageGO.SetActive(true);
                 Debug.Log("Skill-check BERHASIL ✔");
             }
             else
